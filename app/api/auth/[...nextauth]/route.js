@@ -1,4 +1,3 @@
-// app/api/auth/[...nextauth]/route.js
 import NextAuth from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 import CredentialsProvider from 'next-auth/providers/credentials';
@@ -18,29 +17,39 @@ export const authOptions = {
                 email: { label: 'Email', type: 'email' },
                 password: { label: 'Password', type: 'password' },
             },
-            authorize: async (credentials) => {
+            async authorize(credentials, req) {
                 await dbConnect();
-                const user = await User.findOne({ email: credentials.email });
 
-                if (user && bcrypt.compareSync(credentials.password, user.password)) {
-                    return { id: user._id, name: user.name, email: user.email, isAdmin: user.isAdmin };
+                const { email, password } = credentials;
+
+                // Find user in the database
+                const user = await User.findOne({ email });
+
+                if (!user) {
+                    console.error('No user found with this email');
+                    throw new Error('No user found with this email');
                 }
-                return null;
+
+                // Validate password
+                const isValidPassword = await bcrypt.compare(password, user.password);
+
+                if (!isValidPassword) {
+                    console.error('Invalid password');
+                    throw new Error('Invalid password');
+                }
+
+                return { id: user._id, name: user.name, email: user.email, isAdmin: user.isAdmin };
             },
         }),
     ],
     pages: {
         signIn: '/auth/login',
+        error: '/auth/error',
     },
     session: {
         jwt: true,
     },
     callbacks: {
-        async session({ session, token }) {
-            session.user.id = token.id;
-            session.user.isAdmin = token.isAdmin;
-            return session;
-        },
         async jwt({ token, user }) {
             if (user) {
                 token.id = user.id;
@@ -48,7 +57,13 @@ export const authOptions = {
             }
             return token;
         },
+        async session({ session, token }) {
+            session.user.id = token.id;
+            session.user.isAdmin = token.isAdmin;
+            return session;
+        },
     },
+    debug: true, // Enable debug messages in the console
 };
 
 const handler = NextAuth(authOptions);
