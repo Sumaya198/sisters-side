@@ -18,7 +18,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/api/auth/register', formData);
+      const response = await axios.post('/api/users', formData);
       if (response.status === 201) {
         toast.success('Registration successful');
         setTimeout(() => {
@@ -43,6 +43,7 @@ const Register = () => {
           placeholder="Name"
           value={formData.name}
           onChange={handleChange}
+          required
         />
         <input
           type="email"
@@ -50,6 +51,7 @@ const Register = () => {
           placeholder="Email"
           value={formData.email}
           onChange={handleChange}
+          required
         />
         <input
           type="password"
@@ -57,6 +59,7 @@ const Register = () => {
           placeholder="Password"
           value={formData.password}
           onChange={handleChange}
+          required
         />
         <button type="submit">Register</button>
       </form>

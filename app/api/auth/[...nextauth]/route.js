@@ -23,7 +23,7 @@ export const authOptions = {
                 const user = await User.findOne({ email: credentials.email });
 
                 if (user && bcrypt.compareSync(credentials.password, user.password)) {
-                    return { id: user._id, name: user.name, email: user.email };
+                    return { id: user._id, name: user.name, email: user.email, isAdmin: user.isAdmin };
                 }
                 return null;
             },
@@ -38,11 +38,13 @@ export const authOptions = {
     callbacks: {
         async session({ session, token }) {
             session.user.id = token.id;
+            session.user.isAdmin = token.isAdmin;
             return session;
         },
         async jwt({ token, user }) {
             if (user) {
                 token.id = user.id;
+                token.isAdmin = user.isAdmin;
             }
             return token;
         },
