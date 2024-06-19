@@ -1,6 +1,7 @@
 // app/api/admin/reviews/route.js
 import dbConnect from '../../../../utils/dbConnect';
 import MosqueReviews from '../../../../models/MosqueReviews';
+import Mosque from '../../../../models/Mosque'; // Import the Mosque model
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '../../auth/[...nextauth]/route';
 
@@ -32,7 +33,7 @@ export async function GET(req) {
     try {
         const reviews = await MosqueReviews.find({ status })
             .populate('userId', 'name')
-            .populate('mosqueId', 'name address');
+            .populate('mosqueId', 'name address'); // Populate mosque details
         return new Response(JSON.stringify(reviews), {
             status: 200,
             headers: { 'Content-Type': 'application/json' },

@@ -1,10 +1,9 @@
 // app/api/mosque-reviews/route.js
 import dbConnect from '../../../utils/dbConnect';
 import MosqueReviews from '../../../models/MosqueReviews';
-import Mosque from '../../../models/Mosque';
+import Mosque from '../../../models/Mosque'; // Import the Mosque model
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '../auth/[...nextauth]/route';
-import mongoose from 'mongoose';
 
 export async function POST(req) {
     await dbConnect();
