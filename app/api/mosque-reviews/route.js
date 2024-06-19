@@ -37,13 +37,18 @@ export async function POST(req) {
         });
     }
 
-    const { mosqueId, hasSistersSide } = reviewData;
-    console.log('Received review data:', { mosqueId, hasSistersSide });
+    const { mosqueId, hasSistersSide, hasLift, cleanliness, reviewText, recommend, images } = reviewData;
+    console.log('Received review data:', { mosqueId, hasSistersSide, hasLift, cleanliness, reviewText, recommend, images });
 
     const newReview = new MosqueReviews({
         mosqueId,
         userId: session.user.id,
         hasSistersSide,
+        hasLift,
+        cleanliness,
+        reviewText,
+        recommend,
+        images,
     });
 
     try {

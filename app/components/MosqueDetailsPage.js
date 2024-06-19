@@ -1,5 +1,5 @@
 // app/components/MosqueDetailsPage.js
-"use client"
+"use client";
 import { useEffect, useState } from 'react';
 import ReviewForm from './ReviewForm';
 import axios from 'axios';
@@ -43,16 +43,24 @@ const MosqueDetailsPage = ({ mosqueId }) => {
         <div>
             <h1>{mosqueDetails.name}</h1>
             <p>{mosqueDetails.address}</p>
-            <ReviewForm
-                mosqueId={mosqueId}
-                onNewReview={handleNewReview}
-            />
+            <ReviewForm mosqueId={mosqueId} onNewReview={handleNewReview} />
             <h2>Reviews</h2>
             <div>
                 {reviews.map((review) => (
                     <div key={review._id}>
                         <p><strong>{review.userId.name}</strong></p>
                         <p>Sister's Side: {review.hasSistersSide ? 'Yes' : 'No'}</p>
+                        <p>Lift: {review.hasLift}</p>
+                        <p>Cleanliness: {review.cleanliness}</p>
+                        <p>Review: {review.reviewText}</p>
+                        <p>Recommend: {review.recommend ? 'Yes' : 'No'}</p>
+                        {review.images.length > 0 && (
+                            <div>
+                                {review.images.map((image, index) => (
+                                    <img key={index} src={image} alt="Review Image" width="100" />
+                                ))}
+                            </div>
+                        )}
                     </div>
                 ))}
             </div>
