@@ -1,8 +1,10 @@
 // app/api/mosque-reviews/route.js
 import dbConnect from '../../../utils/dbConnect';
 import MosqueReviews from '../../../models/MosqueReviews';
+import Mosque from '../../../models/Mosque';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '../auth/[...nextauth]/route';
+import mongoose from 'mongoose';
 
 export async function POST(req) {
     await dbConnect();
@@ -40,8 +42,26 @@ export async function POST(req) {
     const { mosqueId, hasSistersSide, hasLift, cleanliness, reviewText, recommend, images } = reviewData;
     console.log('Received review data:', { mosqueId, hasSistersSide, hasLift, cleanliness, reviewText, recommend, images });
 
+    // Validate mosqueId
+    let mosque;
+    try {
+        mosque = await Mosque.findOne({ placeId: mosqueId });
+        if (!mosque) {
+            return new Response(JSON.stringify({ error: 'Invalid mosque ID' }), {
+                status: 400,
+                headers: { 'Content-Type': 'application/json' },
+            });
+        }
+    } catch (error) {
+        console.error('Error finding mosque:', error);
+        return new Response(JSON.stringify({ error: 'Invalid mosque ID' }), {
+            status: 400,
+            headers: { 'Content-Type': 'application/json' },
+        });
+    }
+
     const newReview = new MosqueReviews({
-        mosqueId,
+        mosqueId: mosque._id,
         userId: session.user.id,
         hasSistersSide,
         hasLift,
@@ -81,7 +101,7 @@ export async function GET(req) {
     }
 
     try {
-        const reviews = await MosqueReviews.find({ mosqueId }).populate('userId', 'name');
+        const reviews = await MosqueReviews.find({ mosqueId: mongoose.Types.ObjectId(mosqueId) }).populate('userId', 'name');
         return new Response(JSON.stringify(reviews), {
             status: 200,
             headers: { 'Content-Type': 'application/json' },
