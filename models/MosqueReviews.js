@@ -2,14 +2,15 @@
 import mongoose from 'mongoose';
 
 const MosqueReviewsSchema = new mongoose.Schema({
-    mosqueId: { type: String, ref: 'Mosque', required: false },
+    mosqueId: { type: mongoose.Schema.Types.ObjectId, ref: 'Mosque', required: true },
     userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-    hasSistersSide: { type: Boolean, required: false },
-    hasLift: { type: String, required: false },
-    cleanliness: { type: Number, required: false },
-    reviewText: { type: String, required: false },
-    recommend: { type: Boolean, required: false },
-    images: [String], // Array of image URLs
+    hasSistersSide: { type: Boolean, required: true },
+    hasLift: { type: String, required: true },
+    cleanliness: { type: Number, required: true },
+    reviewText: { type: String, required: true },
+    recommend: { type: Boolean, required: true },
+    images: { type: [String], required: true },
+    status: { type: String, default: 'pending' },
 }, { timestamps: true });
 
 export default mongoose.models.MosqueReviews || mongoose.model('MosqueReviews', MosqueReviewsSchema);
