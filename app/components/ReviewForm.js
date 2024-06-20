@@ -1,4 +1,3 @@
-// app/components/ReviewForm.js
 'use client';
 
 import { useSession } from 'next-auth/react';
@@ -16,6 +15,7 @@ const ReviewForm = ({ mosqueId, onNewReview }) => {
         recommend: null,
         images: [],
     });
+    const [uploading, setUploading] = useState(false);
 
     const handleInputChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -33,6 +33,7 @@ const ReviewForm = ({ mosqueId, onNewReview }) => {
     };
 
     const handleImageUpload = async (e) => {
+        setUploading(true);
         const files = e.target.files;
         const uploadedImages = [];
 
@@ -48,11 +49,13 @@ const ReviewForm = ({ mosqueId, onNewReview }) => {
             } catch (error) {
                 console.error('Image upload failed:', error);
                 toast.error('Image upload failed');
+                setUploading(false);
                 return;
             }
         }
 
-        setFormData({ ...formData, images: uploadedImages });
+        setFormData((prevData) => ({ ...prevData, images: uploadedImages }));
+        setUploading(false);
     };
 
     const handleSubmit = async (e) => {
@@ -60,6 +63,11 @@ const ReviewForm = ({ mosqueId, onNewReview }) => {
 
         if (!session) {
             toast.error('You must be logged in to submit a review');
+            return;
+        }
+
+        if (uploading) {
+            toast.error('Please wait for the images to finish uploading');
             return;
         }
 
@@ -146,7 +154,7 @@ const ReviewForm = ({ mosqueId, onNewReview }) => {
                 Upload images:
                 <input type="file" multiple onChange={handleImageUpload} />
             </label>
-            <button type="submit">Submit Review</button>
+            <button type="submit" disabled={uploading}>Submit Review</button>
         </form>
     );
 };
