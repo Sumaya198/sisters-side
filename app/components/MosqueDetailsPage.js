@@ -1,16 +1,18 @@
 "use client";
+
 import { useEffect, useState } from 'react';
-import ReviewForm from './ReviewForm';
+import { useSession } from 'next-auth/react';
 import axios from 'axios';
 import Modal from 'react-modal';
+import ReviewForm from './ReviewForm'; // Import the ReviewForm component
 
 const MosqueDetailsPage = ({ mosqueId }) => {
+    const { data: session } = useSession();
     const [mosqueDetails, setMosqueDetails] = useState(null);
     const [reviews, setReviews] = useState([]);
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [guidelinesAccepted, setGuidelinesAccepted] = useState(false);
 
-    // Load reviews from local storage
     useEffect(() => {
         const storedReviews = localStorage.getItem(`reviews-${mosqueId}`);
         if (storedReviews) {
@@ -28,9 +30,8 @@ const MosqueDetailsPage = ({ mosqueId }) => {
 
         const fetchReviews = async () => {
             try {
-                const response = await axios.get(`/api/mosque-reviews?mosqueId=${mosqueId}`);
+                const response = await axios.get(`/api/mosque-reviews?mosqueId=${mosqueId}&status=approved`);
                 setReviews(response.data);
-                // Save fetched reviews to local storage
                 localStorage.setItem(`reviews-${mosqueId}`, JSON.stringify(response.data));
             } catch (error) {
                 console.error('Error fetching reviews:', error);
@@ -44,11 +45,27 @@ const MosqueDetailsPage = ({ mosqueId }) => {
     const handleNewReview = (newReview) => {
         setReviews((prevReviews) => {
             const updatedReviews = [newReview, ...prevReviews];
-            // Update local storage
             localStorage.setItem(`reviews-${mosqueId}`, JSON.stringify(updatedReviews));
             return updatedReviews;
         });
         setModalIsOpen(false); // Close the modal after submitting the review
+    };
+
+    const handleDeleteReview = async (reviewId) => {
+        console.log('Attempting to delete review with ID:', reviewId);
+        try {
+            const response = await axios.delete(`/api/mosque-reviews/${reviewId}`);
+            if (response.status === 200) {
+                console.log('Review deleted successfully:', reviewId);
+                setReviews((prevReviews) => {
+                    const updatedReviews = prevReviews.filter((review) => review._id !== reviewId);
+                    localStorage.setItem(`reviews-${mosqueId}`, JSON.stringify(updatedReviews));
+                    return updatedReviews;
+                });
+            }
+        } catch (error) {
+            console.error('Error deleting review:', error);
+        }
     };
 
     const openModal = () => setModalIsOpen(true);
@@ -103,6 +120,9 @@ const MosqueDetailsPage = ({ mosqueId }) => {
                                     <img key={index} src={image} alt="Review Image" width="100" />
                                 ))}
                             </div>
+                        )}
+                        {session && (session.user.id === review.userId._id || session.user.isAdmin) && (
+                            <button onClick={() => handleDeleteReview(review._id)}>Delete</button>
                         )}
                     </div>
                 ))}
