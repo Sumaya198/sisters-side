@@ -1,4 +1,3 @@
-// app/components/MosqueDetailsPage.js
 "use client";
 import { useEffect, useState } from 'react';
 import ReviewForm from './ReviewForm';
@@ -8,7 +7,13 @@ const MosqueDetailsPage = ({ mosqueId }) => {
     const [mosqueDetails, setMosqueDetails] = useState(null);
     const [reviews, setReviews] = useState([]);
 
+    // Load reviews from local storage
     useEffect(() => {
+        const storedReviews = localStorage.getItem(`reviews-${mosqueId}`);
+        if (storedReviews) {
+            setReviews(JSON.parse(storedReviews));
+        }
+
         const fetchMosqueDetails = async () => {
             try {
                 const response = await axios.get(`/api/mosques/${mosqueId}`);
@@ -22,6 +27,8 @@ const MosqueDetailsPage = ({ mosqueId }) => {
             try {
                 const response = await axios.get(`/api/mosque-reviews?mosqueId=${mosqueId}`);
                 setReviews(response.data);
+                // Save fetched reviews to local storage
+                localStorage.setItem(`reviews-${mosqueId}`, JSON.stringify(response.data));
             } catch (error) {
                 console.error('Error fetching reviews:', error);
             }
@@ -32,7 +39,12 @@ const MosqueDetailsPage = ({ mosqueId }) => {
     }, [mosqueId]);
 
     const handleNewReview = (newReview) => {
-        setReviews((prevReviews) => [newReview, ...prevReviews]);
+        setReviews((prevReviews) => {
+            const updatedReviews = [newReview, ...prevReviews];
+            // Update local storage
+            localStorage.setItem(`reviews-${mosqueId}`, JSON.stringify(updatedReviews));
+            return updatedReviews;
+        });
     };
 
     if (!mosqueDetails) {
