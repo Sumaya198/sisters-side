@@ -2,10 +2,13 @@
 import { useEffect, useState } from 'react';
 import ReviewForm from './ReviewForm';
 import axios from 'axios';
+import Modal from 'react-modal';
 
 const MosqueDetailsPage = ({ mosqueId }) => {
     const [mosqueDetails, setMosqueDetails] = useState(null);
     const [reviews, setReviews] = useState([]);
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [guidelinesAccepted, setGuidelinesAccepted] = useState(false);
 
     // Load reviews from local storage
     useEffect(() => {
@@ -45,6 +48,14 @@ const MosqueDetailsPage = ({ mosqueId }) => {
             localStorage.setItem(`reviews-${mosqueId}`, JSON.stringify(updatedReviews));
             return updatedReviews;
         });
+        setModalIsOpen(false); // Close the modal after submitting the review
+    };
+
+    const openModal = () => setModalIsOpen(true);
+    const closeModal = () => setModalIsOpen(false);
+
+    const handleAcceptGuidelines = () => {
+        setGuidelinesAccepted(true);
     };
 
     if (!mosqueDetails) {
@@ -55,7 +66,27 @@ const MosqueDetailsPage = ({ mosqueId }) => {
         <div>
             <h1>{mosqueDetails.name}</h1>
             <p>{mosqueDetails.address}</p>
-            <ReviewForm mosqueId={mosqueId} onNewReview={handleNewReview} />
+            <button onClick={openModal}>Leave a Review</button>
+            <Modal
+                isOpen={modalIsOpen}
+                onRequestClose={closeModal}
+                contentLabel="Leave a Review"
+            >
+                {!guidelinesAccepted ? (
+                    <div>
+                        <h2>Community Guidelines</h2>
+                        <p>Please read and accept the community guidelines before leaving a review.</p>
+                        <button onClick={handleAcceptGuidelines}>I Accept</button>
+                        <button onClick={closeModal}>Close</button>
+                    </div>
+                ) : (
+                    <div>
+                        <h2>Leave a Review</h2>
+                        <button onClick={closeModal}>Close</button>
+                        <ReviewForm mosqueId={mosqueId} onNewReview={handleNewReview} />
+                    </div>
+                )}
+            </Modal>
             <h2>Reviews</h2>
             <div>
                 {reviews.map((review) => (
