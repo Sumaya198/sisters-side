@@ -1,0 +1,115 @@
+/* app/components/SearchForm.module.css */
+.searchPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #ebe5e5;
+}
+
+.welcome {
+  margin-bottom: 20px;
+}
+
+.searchFormContainer {
+  width: 100%;
+  height: 50vh;
+  background-image: url('https://images.pexels.com/photos/20629938/pexels-photo-20629938/free-photo-of-white-flowers-on-a-field-covered-with-snow.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.searchForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.input {
+  width: 400px;
+  padding: 10px;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.suggestionsContainer {
+  width: 400px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  position: absolute;
+  z-index: 1000;
+
+  overflow-y: auto;
+}
+
+.suggestion {
+  padding: 10px;
+  cursor: pointer;
+  color: black;
+}
+
+.suggestionHighlighted {
+  background-color: #ddd;
+}
+
+.searchButton {
+  padding: 10px 20px;
+  background-color: #009879;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.mosqueCards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+  margin-top: 20px;
+  padding: 5rem 4rem;
+}
+
+.mosqueCard {
+  background-color: #fff;
+  color: black;
+  text-align: center;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+}
+
+.mosqueCard:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.mosqueImage {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.cardContent {
+  padding: 15px;
+}
+
+.detailsButton {
+  width: 100%;
+  padding: 10px;
+  background-color: #3f3f3f;
+  color: white;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 16px;
+}

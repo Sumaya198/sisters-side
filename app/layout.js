@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar";
 import "./globals.css";
 import 'react-toastify/dist/ReactToastify.css';
 
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -22,6 +23,7 @@ export default function RootLayout({ children }) {
           {children}
           <ToastContainer />
         </AuthProvider>
+    
       </body>
     </html>
   );

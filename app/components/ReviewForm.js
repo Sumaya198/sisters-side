@@ -113,7 +113,7 @@ const ReviewForm = ({ mosqueId, onNewReview }) => {
                     <option value="">Select</option>
                     <option value="yes">Yes</option>
                     <option value="no">No</option>
-                    <option value="no_lift_required">No lift required</option>
+                    <option value="no lift required">No lift required</option>
                 </select>
             </label>
             <label>

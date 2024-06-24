@@ -1,0 +1,79 @@
+/* app/components/HowToSection.module.css */
+.howToSection {
+    padding: 50px 0;
+    text-align: center;
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .textContainer {
+    margin-bottom: 30px;
+  }
+  
+  .sectionTitle {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .discoverButton {
+    padding: 10px 20px;
+    background-color: #009879;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  .discoverButton:hover {
+    background-color: #007f66;
+  }
+  
+  .services {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+  
+  .serviceCard {
+    background-color: #fff;
+    padding: 20px;
+    margin: 10px;
+    width: 30%;
+    min-width: 250px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .icon {
+    margin-bottom: 20px;
+  }
+  
+  .serviceCard h3 {
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .serviceCard p {
+    color: #666;
+  }
+  
+  @media (max-width: 768px) {
+    .services {
+      flex-direction: column;
+     align-items: center;
+    }
+  
+    .serviceCard {
+      width: 80%;
+    }
+  }
+  

@@ -1,0 +1,91 @@
+.aboutContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    height: 100vh;
+    position: relative;
+  }
+  
+  .imageSection {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .aboutImage {
+    width: 80%;
+    max-width: 500px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .textSection {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .aboutHeader {
+    color: #ff6347;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .mainHeader {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .subHeader {
+    font-size: 1.2rem;
+    color: #ff6347;
+    margin-bottom: 20px;
+  }
+  
+  .description {
+    font-size: 1rem;
+    margin-bottom: 20px;
+  }
+  
+  .aboutButton {
+    padding: 10px 20px;
+    background-color: #ff6347;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  .aboutButton:hover {
+    background-color: #e55337;
+  }
+  
+  @media (max-width: 768px) {
+    .aboutContainer {
+      flex-direction: column;
+      text-align: center;
+    }
+    
+    .imageSection {
+      order: 1;
+    }
+    
+    .textSection {
+      order: 2;
+      margin-top: 20px;
+    }
+  
+    .aboutImage {
+      width: 90%;
+      max-width: 300px;
+    }
+  }
+  
