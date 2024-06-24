@@ -1,0 +1,37 @@
+/* Hero.module.css */
+.hero {
+    background-image: url('https://images.pexels.com/photos/1287083/pexels-photo-1287083.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'); 
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    position: relative;
+    z-index: 1;
+}
+  
+.heroContent {
+    background: rgba(0, 0, 0, 0.5); /* Add a semi-transparent background to enhance readability */
+    padding: 20px;
+    border-radius: 10px;
+}
+  
+.button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #009879;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease;
+}
+  
+.button:hover {
+    background-color: #007f66;
+}
