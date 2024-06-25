@@ -36,28 +36,23 @@ const About = () => {
       initial="hidden"
       animate={controls}
       variants={{
-        hidden: { opacity: 0, y: 20 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.8 } }
+        hidden: { opacity: 0, y: 35 },
+        visible: { opacity: 1, y: 0, transition: { duration: 1.8 } }
       }}
     >
       <div className={styles.imageSection}>
         <img
-          src="https://images.pexels.com/photos/1287083/pexels-photo-1287083.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+          src="/about-page.jpg"
           alt="About Image"
           className={styles.aboutImage}
         />
       </div>
       <div className={styles.textSection}>
         <h2 className={styles.aboutHeader}>ABOUT</h2>
-        <h1 className={styles.mainHeader}>Highest Quality Exterior Design</h1>
+        <h1 className={styles.mainHeader}>Text About Sisters Side</h1>
         <p className={styles.subHeader}>
-          Sky was of a deep dark blue spectacle before us was indeed sublime.
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         </p>
-        <p className={styles.description}>
-          It is a paradisematic country, in which roasted parts of sentences fly into your mouth.
-          Even the all-powerful Pointing has no control about.
-        </p>
-        <button className={styles.aboutButton}>About Us</button>
       </div>
     </motion.div>
   );

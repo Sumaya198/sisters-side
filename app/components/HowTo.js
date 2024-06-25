@@ -1,29 +1,34 @@
 // app/components/HowToSection.js
 import React from 'react';
+
+import { CiLogin } from "react-icons/ci";
 import styles from './HowToSection.module.css';
+import { MdOutlineExplore } from "react-icons/md";
+import { MdOutlineRateReview } from "react-icons/md";
+import Link from 'next/link';
 
 const HowTo = () => {
   return (
     <section className={styles.howToSection}>
       <div className={styles.container}>
         <div className={styles.textContainer}>
-          <h2 className={styles.sectionTitle}>Service We Provide</h2>
-          <button className={styles.discoverButton}>Discover</button>
+          <h2 className={styles.sectionTitle}>How It works</h2>
+          <Link href='/search' className={styles.discoverButton}>Explore</Link>
         </div>
         <div className={styles.services}>
           <div className={styles.serviceCard}>
-            <div className={styles.icon}><img src="/path/to/icon1.png" alt="Conceptual Design" /></div>
-            <h3>Conceptual Design</h3>
+            <div className={styles.icon}><CiLogin /></div>
+            <h3>Log in</h3>
             <p>Paradisematic country, in which roasted parts of sentences fly.</p>
           </div>
           <div className={styles.serviceCard}>
-            <div className={styles.icon}><img src="/path/to/icon2.png" alt="Design Development" /></div>
-            <h3>Design Development</h3>
+            <div className={styles.icon}><MdOutlineExplore /></div>
+            <h3>Explore Masjid</h3>
             <p>Even the all-powerful Pointing has no control about the blind texts.</p>
           </div>
           <div className={styles.serviceCard}>
-            <div className={styles.icon}><img src="/path/to/icon3.png" alt="Contract Documents" /></div>
-            <h3>Contract Documents</h3>
+            <div className={styles.icon}><MdOutlineRateReview /></div>
+            <h3>Leave a review</h3>
             <p>One day however a small line of blind text by the name of Lorem.</p>
           </div>
         </div>

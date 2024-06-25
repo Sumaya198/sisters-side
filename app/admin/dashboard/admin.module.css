@@ -1,0 +1,65 @@
+.usersContainer {
+    display: flex;
+    flex-direction: column;
+   /* align-items: center; */
+   align-content: stretch;
+   background-color: #ddd;
+   padding: 10px;
+
+}
+
+.userContentContainer {
+margin: 100px;
+}
+.userHeading {
+    text-align: left;
+}
+.review {
+    background-color: #d2d2d2;
+   margin: 20px 0;
+   color: black;
+   padding: 20px;
+   border: 1px solid #ddd;
+   border-radius: 25px;
+}
+
+.admin-dashboard {
+    background-color: rgb(240, 239, 239);
+}
+
+.adminTitle {
+    color: black;
+}
+
+.viewed-label {
+    background-color: green;
+    color: rgb(255, 255, 255);
+    padding: 5px 10px;
+    border-radius: 5px;
+    /* position: absolute;
+    top: 10px;
+    right: 10px; */
+    font-size: 0.9rem;
+}
+
+.contentAdmin {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.adminReviewName {
+    text-transform: capitalize;
+    font-size: 26px;
+}
+
+.adminBoldQuestions {
+font-weight: bold;
+}
+
+.viewedBtn {
+padding: 10px;
+background-color: green;
+cursor: pointer;
+}

@@ -7,6 +7,7 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 import { formatDistanceToNow } from 'date-fns';
+import styles from './admin.module.css'
 
 const AdminDashboard = () => {
     const { data: session, status } = useSession();
@@ -81,24 +82,27 @@ const AdminDashboard = () => {
     };
 
     const renderUsers = () => (
-        <div>
+        <div >
             <h2>Total Users: {users.length}</h2>
+            <div className={styles.usersContainer}>
             <table className="styled-table">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Email Address</th>
+                        <th className={styles.userHeading}>Name</th>
+                        <th className={styles.userHeading}>Email Address</th>
                     </tr>
                 </thead>
                 <tbody>
                     {users.map((user) => (
                         <tr key={user._id}>
-                            <td>{user.name}</td>
+                            <td className={styles.userContentContainer}>{user.name}</td>
                             <td>{user.email}</td>
                         </tr>
                     ))}
                 </tbody>
             </table>
+
+        </div>
         </div>
     );
 
@@ -107,14 +111,15 @@ const AdminDashboard = () => {
             <h2>New Reviews</h2>
             <div>
                 {pendingReviews.map((review) => (
-                    <div key={review._id} className={`review ${review.status === 'viewed' ? 'viewed' : ''}`}>
-                        <p><strong>{review.userId ? review.userId.name : 'Unknown User'}</strong></p>
+                    <div key={review._id} className={styles.review}>
+                        <div className={styles.contentAdmin}>
+                        <p className={styles.adminReviewName}><strong>{review.userId ? review.userId.name : 'Unknown User'}</strong></p>
                         <p><strong>{review.mosqueId ? review.mosqueId.name : 'Unknown Mosque'}</strong> - {review.mosqueId ? review.mosqueId.address : 'No Address'}</p>
-                        <p>Sister's Side: {review.hasSistersSide ? 'Yes' : 'No'}</p>
-                        <p>Lift: {review.hasLift}</p>
-                        <p>Cleanliness: {review.cleanliness}</p>
-                        <p>Review: {review.reviewText}</p>
-                        <p>Recommend: {review.recommend ? 'Yes' : 'No'}</p>
+                        <p><span className={styles.adminBoldQuestions}>Sister's Side: </span> {review.hasSistersSide ? 'Yes' : 'No'}</p>
+                        <p><span className={styles.adminBoldQuestions}>Lift: </span> {review.hasLift}</p>
+                        <p><span className={styles.adminBoldQuestions}>Cleanliness: </span> {review.cleanliness}</p>
+                        <p><span className={styles.adminBoldQuestions}>Review: </span> {review.reviewText}</p>
+                        <p><span className={styles.adminBoldQuestions}>Recommend: </span> {review.recommend ? 'Yes' : 'No'}</p>
                         {review.images.length > 0 && (
                             <div>
                                 {review.images.map((image, index) => (
@@ -122,8 +127,9 @@ const AdminDashboard = () => {
                                 ))}
                             </div>
                         )}
-                        <button onClick={() => handleViewed(review._id)}>Viewed</button>
+                        <button className={styles.viewedBtn} onClick={() => handleViewed(review._id)}>Viewed</button>
                         
+                    </div>
                     </div>
                 ))}
             </div>
@@ -135,15 +141,16 @@ const AdminDashboard = () => {
             <h2>Viewed Reviews</h2>
             <div>
                 {viewedReviews.map((review) => (
-                    <div key={review._id} className={`review ${review.status === 'viewed' ? 'viewed' : ''}`}>
-                        <span className="viewed-label">Viewed</span>
-                        <p><strong>{review.userId ? review.userId.name : 'Unknown User'}</strong></p>
+                    <div key={review._id} className={styles.review}>
+                        <span className={styles['viewed-label']}>Viewed</span>
+                        <div className={styles.contentAdmin}>
+                        <h2 className={styles.adminReviewName}><strong>{review.userId ? review.userId.name : 'Unknown User'}</strong></h2>
                         <p><strong>{review.mosqueId ? review.mosqueId.name : 'Unknown Mosque'}</strong> - {review.mosqueId ? review.mosqueId.address : 'No Address'}</p>
-                        <p>Sister's Side: {review.hasSistersSide ? 'Yes' : 'No'}</p>
-                        <p>Lift: {review.hasLift}</p>
-                        <p>Cleanliness: {review.cleanliness}</p>
-                        <p>Review: {review.reviewText}</p>
-                        <p>Recommend: {review.recommend ? 'Yes' : 'No'}</p>
+                        <p><span className={styles.adminBoldQuestions}>Sister's Side:</span> {review.hasSistersSide ? 'Yes' : 'No'}</p>
+                        <p><span className={styles.adminBoldQuestions}>Lift:</span> {review.hasLift}</p>
+                        <p><span className={styles.adminBoldQuestions}>Cleanliness:</span> {review.cleanliness}</p>
+                        <p><span className={styles.adminBoldQuestions}>Review:</span> {review.reviewText}</p>
+                        <p><span className={styles.adminBoldQuestions}>Recommend:</span> {review.recommend ? 'Yes' : 'No'}</p>
                         {review.images.length > 0 && (
                             <div>
                                 {review.images.map((image, index) => (
@@ -152,6 +159,7 @@ const AdminDashboard = () => {
                             </div>
                         )}
                         
+                    </div>
                     </div>
                 ))}
             </div>
@@ -163,7 +171,7 @@ const AdminDashboard = () => {
     };
 
     return (
-        <div className="admin-dashboard">
+        <div className={styles['admin-dashboard']}>
             <div className="sidebar">
                 <h1>Logo</h1>
                 <button onClick={() => handleMenuClick('users')}>Users</button>
@@ -173,7 +181,7 @@ const AdminDashboard = () => {
                 <button onClick={() => handleMenuClick('viewedReviews')}>Viewed Reviews</button>
             </div>
             <div className="content">
-                <h1>Admin Dashboard</h1>
+                <h1 className={styles.adminTitle}>Admin Dashboard</h1>
                 {selectedMenu === 'users' && renderUsers()}
                 {selectedMenu === 'pendingReviews' && renderPendingReviews()}
                 {selectedMenu === 'viewedReviews' && renderViewedReviews()}
@@ -184,12 +192,13 @@ const AdminDashboard = () => {
                 }
                 .sidebar {
                     width: 200px;
-                    background-color: #f4f4f4;
-                    padding: 2rem 10px;
+                    background-color: #d2d2d2;
+                    padding: 8rem 10px;
                     position: fixed;
                     height: 100vh;
                     top: 0; /* Adjust according to the navbar height */
                     left: 0;
+                    color: black;
                     overflow-y: auto;
                 }
                 .sidebar button {
@@ -201,6 +210,7 @@ const AdminDashboard = () => {
                     border: 1px solid #ddd;
                     cursor: pointer;
                     position: relative;
+                    color: black;
                 }
                 .sidebar button:hover {
                     background-color: #eee;
@@ -214,6 +224,9 @@ const AdminDashboard = () => {
                     position: absolute;
                     top: 5px;
                     right: 10px;
+                }
+                .card-review {
+color: pink;
                 }
                 .content {
                     margin-left: 220px; /* Adjust according to the sidebar width */
@@ -249,14 +262,19 @@ const AdminDashboard = () => {
                     border-bottom: 2px solid #009879;
                 }
                 .review {
-                    padding: 10px;
+                    padding: 110px;
                     border: 1px solid #ddd;
                     margin-bottom: 10px;
                     position: relative;
+                    color: pink;
+                    background-color: red;
+                }
+                .viewed {
+                    background-color: red;  
                 }
                 .viewed-label {
                     background-color: green;
-                    color: white;
+                    color: green;
                     padding: 5px 10px;
                     border-radius: 5px;
                     position: absolute;
