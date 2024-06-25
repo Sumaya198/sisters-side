@@ -1,5 +1,8 @@
 // app/components/Footer.js
 import React from 'react';
+import { FaInstagram } from "react-icons/fa";
+import { FaFacebook } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 import styles from './Footer.module.css';
 
 const Footer = () => {
@@ -7,21 +10,21 @@ const Footer = () => {
     <footer className={styles.footer}>
       <div className={styles.container}>
         <div className={styles.logo}>
-          <img src="/path/to/logo.png" alt="Company Logo" />
+          LOGO
         </div>
         <div className={styles.socialLinks}>
           <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-            <img src="/path/to/facebook-icon.png" alt="Facebook" />
+          <FaFacebook />
           </a>
           <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-            <img src="/path/to/twitter-icon.png" alt="Twitter" />
+          <FaXTwitter />
           </a>
           <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-            <img src="/path/to/instagram-icon.png" alt="Instagram" />
+          <FaInstagram />
           </a>
         </div>
         <div className={styles.copyright}>
-          &copy; {new Date().getFullYear()} Company Name. All rights reserved.
+          &copy; {new Date().getFullYear()} Sister's Side. All rights reserved.
         </div>
       </div>
     </footer>

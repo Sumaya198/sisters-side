@@ -4,12 +4,21 @@
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
-    background-color: #333;
-    color: white;
+    background-color: transparent;
+    /* color: black; */
     height: 60px;
     z-index: 1000;
-    position: relative;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    transition: background-color 0.3s ease;
 }
+
+.navbar.scrolled {
+    background-color: #d67366; /* Change this to the color you want when scrolled */
+}
+
 
 .logo a {
     color: white;
@@ -26,7 +35,7 @@
 .navLinks {
     list-style: none;
     display: flex;
-    gap: 1rem;
+    gap: 1.8rem;
 }
 
 .navLinks a {
@@ -40,6 +49,50 @@
     color: white;
     cursor: pointer;
 }
+
+
+
+.login {
+    background-color: #CE503F;
+    padding: 5px 10px;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    transition: background-color 0.3s ease;
+}
+
+.login:hover {
+    background-color: #ec7869;
+}
+
+.register {
+    border: 1px solid #CE503F;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.homeLink {
+    display: inline-block;
+    position: relative;
+    padding-bottom: 0.25rem;
+  }
+  
+  .homeLink::before {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background-color: #CE503F;
+    transition: width 0.25s ease-out;
+  }
+  
+  .homeLink:hover::before {
+    width: 100%;
+    left: 0;
+    right: auto;
+  }
+  
 
 @media (max-width: 768px) {
     .hamburger {

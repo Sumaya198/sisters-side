@@ -6,6 +6,7 @@
     padding: 20px;
     height: 100vh;
     position: relative;
+    background-color: rgb(255, 255, 255);
   }
   
   .imageSection {
@@ -16,8 +17,8 @@
   }
   
   .aboutImage {
-    width: 80%;
-    max-width: 500px;
+    width: 90%;
+    max-width: 600px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
@@ -29,6 +30,7 @@
     align-items: center;
     text-align: center;
     padding: 20px;
+
   }
   
   .aboutHeader {
@@ -40,17 +42,22 @@
   .mainHeader {
     font-size: 2.5rem;
     margin-bottom: 20px;
+    color: black;
   }
   
   .subHeader {
     font-size: 1.2rem;
-    color: #ff6347;
+    color: #797979;
     margin-bottom: 20px;
+    text-align: left;
+    line-height: 30px;
+    font-family: Montserrat;
   }
   
   .description {
     font-size: 1rem;
     margin-bottom: 20px;
+    color: black;
   }
   
   .aboutButton {
@@ -85,7 +92,7 @@
   
     .aboutImage {
       width: 90%;
-      max-width: 300px;
+      max-width: 400px;
     }
   }
   

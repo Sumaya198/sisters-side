@@ -23,7 +23,7 @@
   
   .discoverButton {
     padding: 10px 20px;
-    background-color: #009879;
+    background-color: #CE503F;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -33,7 +33,7 @@
   }
   
   .discoverButton:hover {
-    background-color: #007f66;
+    background-color: #ff8a7a;
   }
   
   .services {
@@ -55,6 +55,8 @@
   
   .icon {
     margin-bottom: 20px;
+    color: #CE503F;
+    font-size: 30px;
   }
   
   .serviceCard h3 {
@@ -65,6 +67,7 @@
   .serviceCard p {
     color: #666;
   }
+
   
   @media (max-width: 768px) {
     .services {
