@@ -1,5 +1,7 @@
 // app/components/MosqueCard.js
 import Link from 'next/link';
+import { FaStar } from "react-icons/fa";
+
 import styles from './SearchForm.module.css'; 
 
 const MosqueCard = ({ mosque }) => {
@@ -14,13 +16,16 @@ const MosqueCard = ({ mosque }) => {
                 <img src={photoUrl} alt={mosque.name} className={styles.mosqueImage} />
             )}
             <div className={styles.cardContent}>
-            <h3>{mosque.name}</h3>
-            <p>{mosque.formatted_address}</p>
-            <p>Rating: {mosque.rating}</p>
+            <h3 className={styles.mosqueName}>{mosque.name}</h3>
+            <p className={styles.address}>{mosque.formatted_address}</p>
+            <div className={styles.starContainer}>
+            <div><FaStar /></div> <p>{mosque.rating}</p>
+            </div>
+            
             </div>
 
             <Link href={`/mosque/${mosque.place_id}`} className={styles.detailsButton}>
-                View Details
+                Reviews
             </Link>
         </div>
     );

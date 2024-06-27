@@ -1,0 +1,46 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    color: black;
+}
+
+.label {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.radioGroup {
+    display: flex;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.select,
+.range,
+.textarea,
+.fileInput {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.textarea {
+    height: 100px;
+}
+
+.button {
+    padding: 10px 20px;
+    background-color: #CE503F;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #fb8c7d;
+}

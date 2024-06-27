@@ -10,6 +10,8 @@ import Footer from './Footer';
 import Solution from './Solution';
 
 import styles from './Hero.module.css'; // Import the CSS module
+import Navbar from './Navbar';
+import Reward from './Reward';
 
 const Hero = () => {
   const { data: session, status } = useSession();
@@ -20,6 +22,7 @@ const Hero = () => {
 
   return (
       <>
+      <Navbar />
     <motion.div 
       className={styles.hero}
       initial={{ scale: 1.1 }}
@@ -49,6 +52,7 @@ const Hero = () => {
     </motion.div>
     <About />
     <Solution />
+    <Reward />
     <HowTo />
     <Footer />
     </>

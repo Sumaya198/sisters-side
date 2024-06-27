@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 import Link from 'next/link';
 import styles from './Login.module.css';
+import Navbar from '@/app/components/Navbar';
 
 const Login = () => {
     const [formData, setFormData] = useState({ email: '', password: '' });
@@ -40,12 +41,14 @@ const Login = () => {
     };
 
     return (
+        <>
+        <Navbar />
         <div className={styles.container}>
             <div className={styles.loginContainer}>
                 <div className={styles.imageSection}></div>
                 <div className={styles.formSection}>
                     <h1 className={styles.h1}>Login</h1>
-                    <form onSubmit={handleSubmit}>
+                    <form className={styles.form} onSubmit={handleSubmit}>
                         <input
                          className={styles.input}
                             type="email"
@@ -66,11 +69,12 @@ const Login = () => {
                     </form>
                     <div className={styles.additionalLinks}>
                         <Link href="/forgot-password">Forgot Password?</Link>
-                        <Link href="/register">Create an Account</Link>
+                        <Link href="/auth/register">Create an Account</Link>
                     </div>
                 </div>
             </div>
         </div>
+        </>
     );
 };
 

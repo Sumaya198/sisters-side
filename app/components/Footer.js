@@ -10,7 +10,7 @@ const Footer = () => {
     <footer className={styles.footer}>
       <div className={styles.container}>
         <div className={styles.logo}>
-          LOGO
+          SS
         </div>
         <div className={styles.socialLinks}>
           <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
