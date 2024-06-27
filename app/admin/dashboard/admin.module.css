@@ -3,19 +3,35 @@
     flex-direction: column;
    /* align-items: center; */
    align-content: stretch;
-   background-color: #ddd;
+   
+   background-color: rgb(255, 255, 255);
    padding: 10px;
-
+   color: #262626;
+   border-radius: 20px;
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.userContentContainer {
-margin: 100px;
+.adminTitles {
+    color: black;
+}
+
+.tr {
+    background-color: #CE503F;
+   height: 20px;
+   color: white;
 }
 .userHeading {
     text-align: left;
+    padding: 10px;
+    border-radius: 5px 5px 0 0;
+}
+
+.userContentContainer {
+    border-bottom: 1px solid #E3E8EF;
+    padding: 10px;
 }
 .review {
-    background-color: #d2d2d2;
+    background-color: #FAFAFA;
    margin: 20px 0;
    color: black;
    padding: 20px;
@@ -24,7 +40,12 @@ margin: 100px;
 }
 
 .admin-dashboard {
-    background-color: rgb(240, 239, 239);
+    background-color: #FFFFFF;
+}
+
+.sidbarLogo {
+    margin-bottom: 40px;
+    text-align: center;
 }
 
 .adminTitle {
@@ -32,8 +53,8 @@ margin: 100px;
 }
 
 .viewed-label {
-    background-color: green;
-    color: rgb(255, 255, 255);
+    background-color: #d2f0d2;
+    color: #1A981B;
     padding: 5px 10px;
     border-radius: 5px;
     /* position: absolute;
@@ -60,6 +81,67 @@ font-weight: bold;
 
 .viewedBtn {
 padding: 10px;
-background-color: green;
+background-color: #d2f0d2;
+color: #1A981B;
+font-weight: bold;
 cursor: pointer;
+border:1px solid #1A981B;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+border-radius: 10px;
+}
+.viewedBtn:hover {
+    background-color: #baf1ba;
+}
+
+.sidebarFooter {
+    position: absolute;
+    bottom: 20px;
+    left: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+   
+    cursor: pointer;
+}
+
+.sidbarLastBitContainer {
+    display: flex;
+    gap:10px;
+    color: #525252;
+}
+.signOutButton {
+    background: none;
+    border: none;
+    color: black;
+    cursor: pointer;
+    text-align: left;
+}
+
+.sidbarLastBitContainer:hover {
+    color: #CE503F;
+}
+
+.totalUsersContainer {
+    margin: 20px 0;
+    color: black;
+    border: 1px solid #CE503F;
+    background-color: #f5f5f5;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 20%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    
+  align-items: center;
+  border-radius: 20px;
+}
+.totalUsers {
+    font-size: 20px;
+    color: #262626;
+}
+.totalUserNumber {
+    font-size: 30px;
+    font-weight: bold;
+    color: #262626;
 }

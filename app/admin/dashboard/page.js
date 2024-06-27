@@ -1,13 +1,15 @@
-// app/admin/dashboard/page.js
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useSession } from 'next-auth/react';
+import { useSession, signOut } from 'next-auth/react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 import { formatDistanceToNow } from 'date-fns';
+import { FaSignOutAlt } from "react-icons/fa";
+import { FaHome } from "react-icons/fa";
 import styles from './admin.module.css'
+import Link from 'next/link';
 
 const AdminDashboard = () => {
     const { data: session, status } = useSession();
@@ -82,54 +84,58 @@ const AdminDashboard = () => {
     };
 
     const renderUsers = () => (
-        <div >
-            <h2>Total Users: {users.length}</h2>
+        <div>
+            <div className={styles.totalUsersContainer}>
+                <div>
+                <h2 className={styles.totalUsers}>Total Users:</h2>
+                </div>
+                <div className={styles.totalUserNumber}>{users.length}</div>
+            </div>
+           
             <div className={styles.usersContainer}>
-            <table className="styled-table">
-                <thead>
-                    <tr>
-                        <th className={styles.userHeading}>Name</th>
-                        <th className={styles.userHeading}>Email Address</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {users.map((user) => (
-                        <tr key={user._id}>
-                            <td className={styles.userContentContainer}>{user.name}</td>
-                            <td>{user.email}</td>
+                <table className="styled-table">
+                    <thead>
+                        <tr className={styles.tr}>
+                            <th className={styles.userHeading}>Name</th>
+                            <th className={styles.userHeading}>Email Address</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
-
-        </div>
+                    </thead>
+                    <tbody>
+                        {users.map((user) => (
+                            <tr key={user._id}>
+                                <td className={styles.userContentContainer}>{user.name}</td>
+                                <td className={styles.userContentContainer}>{user.email}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
         </div>
     );
 
     const renderPendingReviews = () => (
         <div>
-            <h2>New Reviews</h2>
+            <h2 className={styles.adminTitles}>New Reviews</h2>
             <div>
                 {pendingReviews.map((review) => (
                     <div key={review._id} className={styles.review}>
                         <div className={styles.contentAdmin}>
-                        <p className={styles.adminReviewName}><strong>{review.userId ? review.userId.name : 'Unknown User'}</strong></p>
-                        <p><strong>{review.mosqueId ? review.mosqueId.name : 'Unknown Mosque'}</strong> - {review.mosqueId ? review.mosqueId.address : 'No Address'}</p>
-                        <p><span className={styles.adminBoldQuestions}>Sister's Side: </span> {review.hasSistersSide ? 'Yes' : 'No'}</p>
-                        <p><span className={styles.adminBoldQuestions}>Lift: </span> {review.hasLift}</p>
-                        <p><span className={styles.adminBoldQuestions}>Cleanliness: </span> {review.cleanliness}</p>
-                        <p><span className={styles.adminBoldQuestions}>Review: </span> {review.reviewText}</p>
-                        <p><span className={styles.adminBoldQuestions}>Recommend: </span> {review.recommend ? 'Yes' : 'No'}</p>
-                        {review.images.length > 0 && (
-                            <div>
-                                {review.images.map((image, index) => (
-                                    <img key={index} src={image} alt="Review Image" width="100" />
-                                ))}
-                            </div>
-                        )}
-                        <button className={styles.viewedBtn} onClick={() => handleViewed(review._id)}>Viewed</button>
-                        
-                    </div>
+                            <p className={styles.adminReviewName}><strong>{review.userId ? review.userId.name : 'Unknown User'}</strong></p>
+                            <p><strong>{review.mosqueId ? review.mosqueId.name : 'Unknown Mosque'}</strong> - {review.mosqueId ? review.mosqueId.address : 'No Address'}</p>
+                            <p><span className={styles.adminBoldQuestions}>Sister's Side: </span> {review.hasSistersSide ? 'Yes' : 'No'}</p>
+                            <p><span className={styles.adminBoldQuestions}>Lift: </span> {review.hasLift}</p>
+                            <p><span className={styles.adminBoldQuestions}>Cleanliness: </span> {review.cleanliness}</p>
+                            <p><span className={styles.adminBoldQuestions}>Review: </span> {review.reviewText}</p>
+                            <p><span className={styles.adminBoldQuestions}>Recommend: </span> {review.recommend ? 'Yes' : 'No'}</p>
+                            {review.images.length > 0 && (
+                                <div>
+                                    {review.images.map((image, index) => (
+                                        <img key={index} src={image} alt="Review Image" width="100" />
+                                    ))}
+                                </div>
+                            )}
+                            <button className={styles.viewedBtn} onClick={() => handleViewed(review._id)}>Viewed</button>
+                        </div>
                     </div>
                 ))}
             </div>
@@ -138,28 +144,27 @@ const AdminDashboard = () => {
 
     const renderViewedReviews = () => (
         <div>
-            <h2>Viewed Reviews</h2>
+            <h2 className={styles.adminTitles}>Viewed Reviews</h2>
             <div>
                 {viewedReviews.map((review) => (
                     <div key={review._id} className={styles.review}>
                         <span className={styles['viewed-label']}>Viewed</span>
                         <div className={styles.contentAdmin}>
-                        <h2 className={styles.adminReviewName}><strong>{review.userId ? review.userId.name : 'Unknown User'}</strong></h2>
-                        <p><strong>{review.mosqueId ? review.mosqueId.name : 'Unknown Mosque'}</strong> - {review.mosqueId ? review.mosqueId.address : 'No Address'}</p>
-                        <p><span className={styles.adminBoldQuestions}>Sister's Side:</span> {review.hasSistersSide ? 'Yes' : 'No'}</p>
-                        <p><span className={styles.adminBoldQuestions}>Lift:</span> {review.hasLift}</p>
-                        <p><span className={styles.adminBoldQuestions}>Cleanliness:</span> {review.cleanliness}</p>
-                        <p><span className={styles.adminBoldQuestions}>Review:</span> {review.reviewText}</p>
-                        <p><span className={styles.adminBoldQuestions}>Recommend:</span> {review.recommend ? 'Yes' : 'No'}</p>
-                        {review.images.length > 0 && (
-                            <div>
-                                {review.images.map((image, index) => (
-                                    <img key={index} src={image} alt="Review Image" width="100" />
-                                ))}
-                            </div>
-                        )}
-                        
-                    </div>
+                            <h2 className={styles.adminReviewName}><strong>{review.userId ? review.userId.name : 'Unknown User'}</strong></h2>
+                            <p><strong>{review.mosqueId ? review.mosqueId.name : 'Unknown Mosque'}</strong> - {review.mosqueId ? review.mosqueId.address : 'No Address'}</p>
+                            <p><span className={styles.adminBoldQuestions}>Sister's Side:</span> {review.hasSistersSide ? 'Yes' : 'No'}</p>
+                            <p><span className={styles.adminBoldQuestions}>Lift:</span> {review.hasLift}</p>
+                            <p><span className={styles.adminBoldQuestions}>Cleanliness:</span> {review.cleanliness}</p>
+                            <p><span className={styles.adminBoldQuestions}>Review:</span> {review.reviewText}</p>
+                            <p><span className={styles.adminBoldQuestions}>Recommend:</span> {review.recommend ? 'Yes' : 'No'}</p>
+                            {review.images.length > 0 && (
+                                <div>
+                                    {review.images.map((image, index) => (
+                                        <img key={index} src={image} alt="Review Image" width="100" />
+                                    ))}
+                                </div>
+                            )}
+                        </div>
                     </div>
                 ))}
             </div>
@@ -173,12 +178,26 @@ const AdminDashboard = () => {
     return (
         <div className={styles['admin-dashboard']}>
             <div className="sidebar">
-                <h1>Logo</h1>
+                <div className={styles.sidbarLogo}>
+                <h1 >SS</h1>
+                </div>
+               
                 <button onClick={() => handleMenuClick('users')}>Users</button>
                 <button onClick={() => handleMenuClick('pendingReviews')}>
                     Reviews {newReviewCount > 0 && <span className="badge">+{newReviewCount}</span>}
                 </button>
                 <button onClick={() => handleMenuClick('viewedReviews')}>Viewed Reviews</button>
+                <div className={styles.sidebarFooter}>
+                    <div className={styles.sidbarLastBitContainer}>
+                        <div><FaHome /></div>
+                        <div><Link href='/'>Home</Link></div>
+                    </div>
+                
+                    <div className={styles.sidbarLastBitContainer}>
+                        <div><FaSignOutAlt /></div>
+                        <div><Link href='' onClick={() => signOut()}>Sign Out</Link></div>
+                    </div>
+                </div>
             </div>
             <div className="content">
                 <h1 className={styles.adminTitle}>Admin Dashboard</h1>
@@ -192,8 +211,8 @@ const AdminDashboard = () => {
                 }
                 .sidebar {
                     width: 200px;
-                    background-color: #d2d2d2;
-                    padding: 8rem 10px;
+                    background-color: #FAFAFA;
+                    padding: 30px 10px;
                     position: fixed;
                     height: 100vh;
                     top: 0; /* Adjust according to the navbar height */
@@ -204,16 +223,20 @@ const AdminDashboard = () => {
                 .sidebar button {
                     display: block;
                     width: 100%;
+                    margin-top: 20px;
                     margin-bottom: 10px;
                     padding: 10px;
                     background-color: #fff;
-                    border: 1px solid #ddd;
+                    border: none;
+                    border-radius: 20px;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
                     cursor: pointer;
                     position: relative;
                     color: black;
                 }
                 .sidebar button:hover {
-                    background-color: #eee;
+                    background-color: #CE503F;
+                    color: white;
                 }
                 .badge {
                     background-color: red;
@@ -225,42 +248,29 @@ const AdminDashboard = () => {
                     top: 5px;
                     right: 10px;
                 }
-                .card-review {
-color: pink;
+                .sidebarFooter {
+                    position: absolute;
+                    bottom: 20px;
+                    left: 10px;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+                }
+                .signOutButton {
+                    background: none;
+                    border: none;
+                    color: black;
+                    cursor: pointer;
+                    text-align: left;
                 }
                 .content {
                     margin-left: 220px; /* Adjust according to the sidebar width */
                     flex: 1;
-                    padding: 20px;
+                    padding: 60px;
                     overflow-y: auto;
-                    height: calc(100vh - 60px); /* Adjust according to the navbar height */
+                    height: 100vh; /* Adjust according to the navbar height */
                 }
-                .styled-table {
-                    width: 100%;
-                    border-collapse: collapse;
-                    margin-bottom: 20px;
-                    font-size: 0.9em;
-                    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-                }
-                .styled-table thead tr {
-                    background-color: #009879;
-                    color: #ffffff;
-                    text-align: left;
-                }
-                .styled-table th,
-                .styled-table td {
-                    padding: 12px 15px;
-                }
-                .styled-table tbody tr {
-                    border-bottom: 1px solid #dddddd;
-                }
-                .styled-table tbody tr:nth-of-type(even) {
-                    background-color: #f3f3f3;
-                }
-                .styled-table tbody tr:last-of-type {
-                    border-bottom: 2px solid #009879;
-                }
+               
                 .review {
                     padding: 110px;
                     border: 1px solid #ddd;
@@ -288,3 +298,4 @@ color: pink;
 };
 
 export default AdminDashboard;
+

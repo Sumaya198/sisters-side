@@ -19,7 +19,7 @@ export default function RootLayout({ children }) {
     <html lang="en" key="root-layout">
       <body className={inter.className}>
         <AuthProvider>
-        <Navbar />
+        {/* <Navbar /> */}
           {children}
           <ToastContainer />
         </AuthProvider>

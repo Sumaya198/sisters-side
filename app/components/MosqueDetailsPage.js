@@ -5,9 +5,13 @@ import { useSession } from 'next-auth/react';
 import axios from 'axios';
 import Modal from 'react-modal';
 import ReviewForm from './ReviewForm'; // Import the ReviewForm component
-import { formatDistanceToNow } from 'date-fns'; // Import the date-fns function
+import { formatDistanceToNow } from 'date-fns'; // Import the date-fns functions
+import { FaStar } from "react-icons/fa";
+import { IoClose } from "react-icons/io5";
+import { FaTrashAlt } from "react-icons/fa";
 import styles from './MosqueDetailsPage.module.css'; // Import the CSS module
 import Footer from './Footer'; // Import the Footer component
+import Navbar from './Navbar';
 
 const MosqueDetailsPage = ({ mosqueId }) => {
   const { data: session } = useSession();
@@ -84,49 +88,74 @@ const MosqueDetailsPage = ({ mosqueId }) => {
   }
 
   return (
+    <>
+    <Navbar />
     <div className={styles.pageContainer}>
       <div className={styles.contentWrapper}>
         <div className={styles.hero}>
           <div className={styles.heroContent}>
-            <h1>{mosqueDetails.name}</h1>
-            <p>{mosqueDetails.address}</p>
+            <h1 className={styles.mosqueName}>{mosqueDetails.name}</h1>
+            <p className={styles.mosqueAddress}>{mosqueDetails.address}</p>
+            <p className={styles.starr}><FaStar className={styles.mosqueStar}/> {mosqueDetails.rating ? mosqueDetails.rating.toFixed(1) : 'No ratings yet'}</p>
           </div>
         </div>
-        <button onClick={openModal} className={styles.reviewButton}>Leave a Review</button>
+       <div className={styles.reviewButtonContainer}>
+       <button onClick={openModal} className={styles.reviewButton}>Leave a Review</button>
+       </div>
+        
         <Modal
           isOpen={modalIsOpen}
           onRequestClose={closeModal}
+          className={styles.modal}
+          overlayClassName={styles.overlay}
           contentLabel="Leave a Review"
         >
           {!guidelinesAccepted ? (
-            <div>
-              <h2>Community Guidelines</h2>
-              <p>Please read and accept the community guidelines before leaving a review.</p>
-              <button onClick={handleAcceptGuidelines}>I Accept</button>
-              <button onClick={closeModal}>Close</button>
+            <div className={styles.modalContent}>
+              <h2 className={styles.modalTitle}>Community Guidelines</h2>
+              <p className={styles.modalText}>Please read and accept the community guidelines before leaving a review.</p>
+              <div className={styles.modalButtonContainer}>
+                <button className={styles.modalButton} onClick={handleAcceptGuidelines}>Accept</button>
+                <button className={styles.modalButton} onClick={closeModal}>Decline</button>
+              </div>
             </div>
           ) : (
             <div>
-              <h2>Leave a Review</h2>
-              <button onClick={closeModal}>Close</button>
-              <ReviewForm mosqueId={mosqueId} onNewReview={handleNewReview} />
+
+              <div className={styles.modalContent}>
+              <button className={styles.closeButton} onClick={closeModal}><IoClose /></button>
+                <h2 className={styles.modalTitle}>Leave a Review</h2>
+
+                <ReviewForm mosqueId={mosqueId} onNewReview={handleNewReview} />
+              </div>
             </div>
           )}
         </Modal>
         <h2 className={styles.reviewsTitle}>Reviews</h2>
         <div className={styles.reviewsContainer}>
           {reviews.length === 0 ? (
-            <p>No reviews yet</p>
+            <p className={styles.noReviews}>No reviews yet</p>
           ) : (
             reviews.map((review) => {
               console.log('Review data:', review); // Debugging log
               return (
                 <div key={review._id} className={styles.reviewCard}>
-                  <p>Sister's Side: {review.hasSistersSide ? 'Yes' : 'No'}</p>
-                  <p>Lift: {review.hasLift}</p>
-                  <p>Cleanliness: {review.cleanliness}</p>
-                  <p>Review: {review.reviewText}</p>
-                  <p>Recommend: {review.recommend ? 'Yes' : 'No'}</p>
+                  <div className={styles.dateAndDelete}>
+                  <p className={styles.date}>{formatDistanceToNow(new Date(review.createdAt))} ago</p>
+                  {session && (session.user.id === review.userId._id || session.user.isAdmin) && (
+                    <button className={styles.deleteButton} onClick={() => handleDeleteReview(review._id)}><FaTrashAlt /></button>
+                  )}
+                  </div>
+                  <div className={styles.questionsContainer}>
+                    <p className={styles.question}><span className={styles.bold}>Sister's Side:</span> {review.hasSistersSide ? 'Yes' : 'No'}</p>
+                    <p className={styles.question}><span className={styles.bold}>Lift:</span> {review.hasLift}</p>
+                    <p className={styles.question}><span className={styles.bold}>Cleanliness:</span> {review.cleanliness}</p>
+                    <p className={styles.question}><span className={styles.bold}>Recommend:</span> {review.recommend ? 'Yes' : 'No'}</p>
+                  </div>
+                  <div className={styles.reviewContent}>
+                    <h3 className={styles.bold}>Review:</h3>
+                    <p>{review.reviewText}</p>
+                  </div>
                   {review.images.length > 0 && (
                     <div className={styles.imagesContainer}>
                       {review.images.map((image, index) => (
@@ -134,10 +163,7 @@ const MosqueDetailsPage = ({ mosqueId }) => {
                       ))}
                     </div>
                   )}
-                  <p>Submitted {formatDistanceToNow(new Date(review.createdAt))} ago</p> {/* Display the date */}
-                  {session && (session.user.id === review.userId._id || session.user.isAdmin) && (
-                    <button onClick={() => handleDeleteReview(review._id)}>Delete</button>
-                  )}
+                
                 </div>
               );
             })
@@ -146,6 +172,7 @@ const MosqueDetailsPage = ({ mosqueId }) => {
       </div>
       <Footer />
     </div>
+    </>
   );
 };
 

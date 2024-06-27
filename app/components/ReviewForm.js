@@ -4,6 +4,7 @@ import { useSession } from 'next-auth/react';
 import { useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import styles from './ReviewForm.module.css'; // Import the CSS module
 
 const ReviewForm = ({ mosqueId, onNewReview }) => {
     const { data: session, status } = useSession();
@@ -91,32 +92,38 @@ const ReviewForm = ({ mosqueId, onNewReview }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label>
+        <form onSubmit={handleSubmit} className={styles.form}>
+            <label className={styles.label}>
                 Does the mosque have a sister’s side?
-                <input
-                    type="radio"
-                    name="hasSistersSide"
-                    checked={formData.hasSistersSide === true}
-                    onChange={() => setFormData({ hasSistersSide: true })}
-                /> Yes
-                <input
-                    type="radio"
-                    name="hasSistersSide"
-                    checked={formData.hasSistersSide === false}
-                    onChange={() => setFormData({ hasSistersSide: false })}
-                /> No
+                <div className={styles.radioGroup}>
+                    <label>
+                        <input
+                            type="radio"
+                            name="hasSistersSide"
+                            checked={formData.hasSistersSide === true}
+                            onChange={() => setFormData({ hasSistersSide: true })}
+                        /> Yes
+                    </label>
+                    <label>
+                        <input
+                            type="radio"
+                            name="hasSistersSide"
+                            checked={formData.hasSistersSide === false}
+                            onChange={() => setFormData({ hasSistersSide: false })}
+                        /> No
+                    </label>
+                </div>
             </label>
-            <label>
+            <label className={styles.label}>
                 Does the mosque have a lift?
-                <select name="hasLift" value={formData.hasLift} onChange={handleInputChange}>
+                <select name="hasLift" value={formData.hasLift} onChange={handleInputChange} className={styles.select}>
                     <option value="">Select</option>
                     <option value="yes">Yes</option>
                     <option value="no">No</option>
                     <option value="no lift required">No lift required</option>
                 </select>
             </label>
-            <label>
+            <label className={styles.label}>
                 How clean is the mosque?
                 <input
                     type="range"
@@ -125,36 +132,44 @@ const ReviewForm = ({ mosqueId, onNewReview }) => {
                     max="5"
                     value={formData.cleanliness}
                     onChange={handleInputChange}
+                    className={styles.range}
                 />
             </label>
-            <label>
+            <label className={styles.label}>
                 Write a review:
                 <textarea
                     name="reviewText"
                     value={formData.reviewText}
                     onChange={handleInputChange}
+                    className={styles.textarea}
                 ></textarea>
             </label>
-            <label>
+            <label className={styles.label}>
                 Do you recommend this mosque?
-                <input
-                    type="radio"
-                    name="recommend"
-                    checked={formData.recommend === true}
-                    onChange={() => handleRecommendChange(true)}
-                /> Yes
-                <input
-                    type="radio"
-                    name="recommend"
-                    checked={formData.recommend === false}
-                    onChange={() => handleRecommendChange(false)}
-                /> No
+                <div className={styles.radioGroup}>
+                    <label>
+                        <input
+                            type="radio"
+                            name="recommend"
+                            checked={formData.recommend === true}
+                            onChange={() => handleRecommendChange(true)}
+                        /> Yes
+                    </label>
+                    <label>
+                        <input
+                            type="radio"
+                            name="recommend"
+                            checked={formData.recommend === false}
+                            onChange={() => handleRecommendChange(false)}
+                        /> No
+                    </label>
+                </div>
             </label>
-            <label>
+            <label className={styles.label}>
                 Upload images:
-                <input type="file" multiple onChange={handleImageUpload} />
+                <input type="file" multiple onChange={handleImageUpload} className={styles.fileInput} />
             </label>
-            <button type="submit" disabled={uploading}>Submit Review</button>
+            <button type="submit" disabled={uploading} className={styles.button}>Submit Review</button>
         </form>
     );
 };

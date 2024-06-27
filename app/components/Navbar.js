@@ -37,7 +37,7 @@ const Navbar = () => {
     return (
         <nav className={`${styles.navbar} ${scrolled ? styles.scrolled : ''}`}>
             <div className={styles.logo}>
-                <Link href="/">Logo</Link>
+                <Link href="/">SS</Link>
             </div>
             <div className={styles.hamburger} onClick={toggleMenu}>
                 {menuOpen ? '✕' : '☰'}

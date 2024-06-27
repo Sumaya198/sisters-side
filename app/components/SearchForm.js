@@ -7,6 +7,7 @@ import { useSession } from 'next-auth/react';
 import Autosuggest from 'react-autosuggest';
 import suggestionsList from '../../utils/suggestionsList'; // Import the suggestions list
 import styles from './SearchForm.module.css'; // Import the CSS module
+import Navbar from './Navbar';
 
 const getSuggestions = (value) => {
   const inputValue = value.trim().toLowerCase();
@@ -68,8 +69,12 @@ const SearchForm = () => {
   };
 
   return (
+    <>
+    <Navbar />
     <div className={styles.searchPage}>
+      
       <div className={styles.searchFormContainer}>
+      <h1>Enter your location</h1>
         <form onSubmit={handleSubmit} className={styles.searchForm}>
           <Autosuggest
             suggestions={suggestions}
@@ -81,6 +86,11 @@ const SearchForm = () => {
               placeholder: 'Enter country, state, and city',
               value: searchValue,
               onChange: handleInputChange,
+              onKeyDown: (event) => {
+                if (event.key === 'Enter') {
+                  handleSubmit(event);
+                }
+              },
             }}
             theme={{
               input: styles.input,
@@ -102,6 +112,7 @@ const SearchForm = () => {
         ) : null}
       </div>
     </div>
+    </>
   );
 };
 

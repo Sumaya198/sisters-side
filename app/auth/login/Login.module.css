@@ -1,9 +1,11 @@
 .container {
     display: flex;
     align-items: center;
+   
     justify-content: center;
     min-height: 100vh;
-    background-color: #f9d694;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(155, 155, 155, 0.5)), url('../../../public/14.jpg');
+    background-size: cover;
     
 }
 
@@ -51,12 +53,14 @@
     font-size: 1rem;
     border: 1px solid #ccc;
     border-radius: 5px;
+    color: rgb(0, 0, 0);
+    background-color: rgb(244, 243, 243);
 }
 
 .button {
     padding: 10px;
     font-size: 1rem;
-    background-color: #009879;
+    background-color: #CE503F;
     color: white;
     border: none;
     border-radius: 5px;
@@ -65,7 +69,7 @@
 }
 
 .button:hover {
-    background-color: #007f66;
+    background-color: #f18577;
 }
 
 .additionalLinks {
@@ -76,10 +80,16 @@
 }
 
 .additionalLinks a {
-    color: #009879;
+    color: #CE503F;
     text-decoration: none;
 }
 
 .additionalLinks a:hover {
     text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .loginContainer {
+       margin: 0 10px;
+    }
 }
