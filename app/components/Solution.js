@@ -11,28 +11,28 @@ const Solution = () => {
   return (
     <div className={styles.container}>
       <div className={styles.question}>
-        <h1 className={styles.accessbilityTitle}>TALK ABOUT ACCESSIBILITY RELATING TO SISTER'S SIDE...</h1>
+        <h1 className={styles.accessbilityTitle}>Share what sisters' want to know</h1>
       </div>
       <div className={styles.tiles}>
         <div className={styles.tile}>
           <div className={styles.number}>01</div>
           <div className={styles.icon}><AiOutlineWoman /></div>
-          <div className={styles.text}>Includes A Female Area</div>
+          <div className={styles.text}>availability of a sister's side</div>
         </div>
         <div className={styles.tile}>
           <div className={styles.number}>02</div>
           <div className={styles.icon}><MdSwitchAccessShortcut /></div>
-          <div className={styles.text}>Wudu Area With Handrails</div>
+          <div className={styles.text}>wudu area with handrails</div>
         </div>
         <div className={styles.tile}>
           <div className={styles.number}>03</div>
           <div className={styles.icon}><GiElevator /></div>
-          <div className={styles.text}>Includes A Lift</div>
+          <div className={styles.text}>Cleanliness </div>
         </div>
         <div className={styles.tile}>
           <div className={styles.number}>04</div>
           <div className={styles.icon}><FaWheelchair /></div>
-          <div className={styles.text}>Wheelchair Accessbility</div>
+          <div className={styles.text}>wheel-chair accessibility</div>
         </div>
       </div>
     </div>

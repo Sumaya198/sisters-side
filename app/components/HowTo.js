@@ -19,17 +19,14 @@ const HowTo = () => {
           <div className={styles.serviceCard}>
             <div className={styles.icon}><CiLogin /></div>
             <h3>Log in</h3>
-            <p>Paradisematic country, in which roasted parts of sentences fly.</p>
           </div>
           <div className={styles.serviceCard}>
             <div className={styles.icon}><MdOutlineExplore /></div>
             <h3>Explore Masjid</h3>
-            <p>Even the all-powerful Pointing has no control about the blind texts.</p>
           </div>
           <div className={styles.serviceCard}>
             <div className={styles.icon}><MdOutlineRateReview /></div>
             <h3>Leave a review</h3>
-            <p>One day however a small line of blind text by the name of Lorem.</p>
           </div>
         </div>
       </div>

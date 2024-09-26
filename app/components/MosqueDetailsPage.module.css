@@ -11,7 +11,7 @@
 }
 
 .hero {
-  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(155, 155, 155, 0.5)), url('../../public/mobile-home.jpg');
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(155, 155, 155, 0.5)), url('../../public/details-page.jpg');
   background-size: cover;
   background-position: center;
   height: 600px;
@@ -228,6 +228,7 @@
 
 .noReviews {
   color: black;
+  text-transform: capitalize;
 }
 
 .modalButton:hover {
@@ -248,11 +249,32 @@
   display: flex;
   justify-content: space-between;
 }
+
+.modalsubText {
+  color: black;
+  text-align: center;
+  margin-bottom: 20px;
+  line-height: 25px;
+}
 @media (max-width: 1268px) {
+  .modal {
+    width: 80vw;
+  }
+
   .reviewsContainer {
     flex-direction: column;
   }
   .reviewCard {
     width: unset;
+  }
+}
+
+@media (max-width: 768px) {
+  .mosqueName {
+    font-size: 36px;
+  }
+
+  .mosqueAddress {
+    font-size: 20px;
   }
 }

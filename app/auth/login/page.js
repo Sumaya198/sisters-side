@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import Link from 'next/link';
 import styles from './Login.module.css';
 import Navbar from '@/app/components/Navbar';
+import NavbarBlack from '@/app/components/NavbarBlack';
 
 const Login = () => {
     const [formData, setFormData] = useState({ email: '', password: '' });
@@ -42,7 +43,7 @@ const Login = () => {
 
     return (
         <>
-        <Navbar />
+       <NavbarBlack />
         <div className={styles.container}>
             <div className={styles.loginContainer}>
                 <div className={styles.imageSection}></div>

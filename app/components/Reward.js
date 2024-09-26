@@ -6,15 +6,14 @@ const Reward = () => {
   return (
     <div className={styles.container}>
       <div className={styles.textContainer}>
-        <h1>TELL US ABOUT YOUR<br />LOCAL MASJID OR<br />A MASJID YOU VISITED</h1>
-        <hr />
-        <p>Gain reward by making life easier for others<br />by sharing valuable information about masjid accessibility</p>
+        <h1>Tell us about the sisters' side of your local masjid or a masjid you have visited</h1>
+        <hr className={styles.underline}/>
         <div className={styles.buttonContainer}>
-        <Link href='/search' className={styles.discoverButton}>Explore Masjids</Link>
+        <Link href='/search' className={styles.discoverButton}>Leave a review</Link>
         </div>
       </div>
       <div className={styles.imageContainer}>
-        <img src="/reward-image.jpg" alt="Masjid" className={styles.image} />
+        <img src="/tell-us-section.png" alt="Masjid" className={styles.image} />
       </div>
     </div>
   )

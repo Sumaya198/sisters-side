@@ -96,7 +96,6 @@ const MosqueDetailsPage = ({ mosqueId }) => {
           <div className={styles.heroContent}>
             <h1 className={styles.mosqueName}>{mosqueDetails.name}</h1>
             <p className={styles.mosqueAddress}>{mosqueDetails.address}</p>
-            <p className={styles.starr}><FaStar className={styles.mosqueStar}/> {mosqueDetails.rating ? mosqueDetails.rating.toFixed(1) : 'No ratings yet'}</p>
           </div>
         </div>
        <div className={styles.reviewButtonContainer}>
@@ -113,7 +112,8 @@ const MosqueDetailsPage = ({ mosqueId }) => {
           {!guidelinesAccepted ? (
             <div className={styles.modalContent}>
               <h2 className={styles.modalTitle}>Community Guidelines</h2>
-              <p className={styles.modalText}>Please read and accept the community guidelines before leaving a review.</p>
+              <h3 className={styles.modalText}>Please read and accept the community guidelines before leaving a review.</h3>
+<p className={styles.modalsubText}>Sister’s Side is intended to be a resource guide to help Muslim women find suitable spaces to pray. In order to create a beneficial resource guide, all reviews must be constructive and focus on the physical space -- keeping in mind the provided criteria. We encourage members to include images of the sister’s side in their reviews, but to also avoid uploading images of masjids that may include any identifiable individuals and make sure to follow masjid rules on photography and videography. We have a zero-tolerance approach to any form of discrimination, bullying and harassment and anyone who would like to leave a review must adhere to the community guidelines. Reviews that violate the community guidelines will be subject to removal.</p>
               <div className={styles.modalButtonContainer}>
                 <button className={styles.modalButton} onClick={handleAcceptGuidelines}>Accept</button>
                 <button className={styles.modalButton} onClick={closeModal}>Decline</button>

@@ -6,7 +6,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import Link from 'next/link';
 import styles from './Register.module.css';
-import Navbar from '@/app/components/Navbar';
+import NavbarBlack from '@/app/components/NavbarBlack';
 
 const Register = () => {
     const [formData, setFormData] = useState({ name: '', email: '', password: '', confirmPassword: '' });
@@ -41,7 +41,7 @@ const Register = () => {
 
     return (
         <>
-        <Navbar />
+        <NavbarBlack />
         <div className={styles.container}>
             <div className={styles.registerContainer}>
                 <div className={styles.imageSection}></div>

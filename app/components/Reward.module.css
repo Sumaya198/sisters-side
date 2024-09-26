@@ -89,6 +89,16 @@
       flex-direction: column;
       text-align: center;
     }
+
+    .textContainer h1 {
+      font-size: 30px;
+      line-height: 1.2;
+      font-family: 'Arial', sans-serif;
+    }
+
+    .underline {
+      display: none;
+    }
   
     .imageContainer {
       margin-top: 20px;

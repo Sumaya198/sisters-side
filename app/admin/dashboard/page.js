@@ -8,6 +8,9 @@ import { toast } from 'react-toastify';
 import { formatDistanceToNow } from 'date-fns';
 import { FaSignOutAlt } from "react-icons/fa";
 import { FaHome } from "react-icons/fa";
+import { FaRegUser } from "react-icons/fa";
+import { MdOutlineReviews } from "react-icons/md";
+import { GrView } from "react-icons/gr";
 import styles from './admin.module.css'
 import Link from 'next/link';
 
@@ -177,122 +180,34 @@ const AdminDashboard = () => {
 
     return (
         <div className={styles['admin-dashboard']}>
-            <div className="sidebar">
+            <div className={styles.sidebar}>
                 <div className={styles.sidbarLogo}>
-                <h1 >SS</h1>
+                <h1>SS</h1>
                 </div>
                
-                <button onClick={() => handleMenuClick('users')}>Users</button>
+                <button onClick={() => handleMenuClick('users')}><FaRegUser /> <div className={styles.sidebarMenuText}>Users</div></button>
                 <button onClick={() => handleMenuClick('pendingReviews')}>
-                    Reviews {newReviewCount > 0 && <span className="badge">+{newReviewCount}</span>}
+                <MdOutlineReviews /> <div className={styles.sidebarMenuText}>Reviews</div> {newReviewCount > 0 && <span className={styles.badge}>+{newReviewCount}</span>}
                 </button>
-                <button onClick={() => handleMenuClick('viewedReviews')}>Viewed Reviews</button>
+                <button onClick={() => handleMenuClick('viewedReviews')}><GrView /> <div className={styles.sidebarMenuText}>Viewed Reviews</div></button>
                 <div className={styles.sidebarFooter}>
                     <div className={styles.sidbarLastBitContainer}>
                         <div><FaHome /></div>
-                        <div><Link href='/'>Home</Link></div>
+                        <div ><Link href='/' className={styles.homeFooterMenu}>Home</Link></div>
                     </div>
                 
                     <div className={styles.sidbarLastBitContainer}>
                         <div><FaSignOutAlt /></div>
-                        <div><Link href='' onClick={() => signOut()}>Sign Out</Link></div>
+                        <div className={styles.homeFooterMenu}><Link href='' onClick={() => signOut()}>Sign Out</Link></div>
                     </div>
                 </div>
             </div>
-            <div className="content">
+            <div className={styles.content}>
                 <h1 className={styles.adminTitle}>Admin Dashboard</h1>
                 {selectedMenu === 'users' && renderUsers()}
                 {selectedMenu === 'pendingReviews' && renderPendingReviews()}
                 {selectedMenu === 'viewedReviews' && renderViewedReviews()}
             </div>
-            <style jsx>{`
-                .admin-dashboard {
-                    display: flex;
-                }
-                .sidebar {
-                    width: 200px;
-                    background-color: #FAFAFA;
-                    padding: 30px 10px;
-                    position: fixed;
-                    height: 100vh;
-                    top: 0; /* Adjust according to the navbar height */
-                    left: 0;
-                    color: black;
-                    overflow-y: auto;
-                }
-                .sidebar button {
-                    display: block;
-                    width: 100%;
-                    margin-top: 20px;
-                    margin-bottom: 10px;
-                    padding: 10px;
-                    background-color: #fff;
-                    border: none;
-                    border-radius: 20px;
-                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                    cursor: pointer;
-                    position: relative;
-                    color: black;
-                }
-                .sidebar button:hover {
-                    background-color: #CE503F;
-                    color: white;
-                }
-                .badge {
-                    background-color: red;
-                    color: white;
-                    padding: 2px 8px;
-                    border-radius: 50%;
-                    font-size: 0.8rem;
-                    position: absolute;
-                    top: 5px;
-                    right: 10px;
-                }
-                .sidebarFooter {
-                    position: absolute;
-                    bottom: 20px;
-                    left: 10px;
-                    display: flex;
-                    flex-direction: column;
-                    gap: 10px;
-                }
-                .signOutButton {
-                    background: none;
-                    border: none;
-                    color: black;
-                    cursor: pointer;
-                    text-align: left;
-                }
-                .content {
-                    margin-left: 220px; /* Adjust according to the sidebar width */
-                    flex: 1;
-                    padding: 60px;
-                    overflow-y: auto;
-                    height: 100vh; /* Adjust according to the navbar height */
-                }
-               
-                .review {
-                    padding: 110px;
-                    border: 1px solid #ddd;
-                    margin-bottom: 10px;
-                    position: relative;
-                    color: pink;
-                    background-color: red;
-                }
-                .viewed {
-                    background-color: red;  
-                }
-                .viewed-label {
-                    background-color: green;
-                    color: green;
-                    padding: 5px 10px;
-                    border-radius: 5px;
-                    position: absolute;
-                    top: 10px;
-                    right: 10px;
-                    font-size: 0.9rem;
-                }
-            `}</style>
         </div>
     );
 };

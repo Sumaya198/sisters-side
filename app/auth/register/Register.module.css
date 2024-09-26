@@ -4,15 +4,15 @@
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(155, 155, 155, 0.5)), url('../../../public/14.jpg');
-    background-size: cover;
+    /* background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(155, 155, 155, 0.5)), url('../../../public/14.jpg');
+    background-size: cover; */
 }
 
 .registerContainer {
     display: flex;
     max-width: 1000px;
     width: 100%;
-    background: white;
+    background: #eceef0;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     overflow: hidden;
@@ -21,7 +21,7 @@
 
 .imageSection {
     flex: 1;
-    background: url('../../../public/mobile-home.jpg') no-repeat center center;
+    background: url('../../../public/register-two.png') no-repeat center center;
     background-size: cover;
 }
 
@@ -89,5 +89,6 @@
 @media (max-width: 768px) {
     .registerContainer {
        margin: 0 10px;
+       flex-direction: column;
     }
 }

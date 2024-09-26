@@ -1,5 +1,5 @@
 .hero {
-    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(155, 155, 155, 0.5)), url('../../public/orangehijab.jpg');
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(155, 155, 155, 0.5)), url('../../public/hero-image-for-mawal.jpg');
     background-size: cover;
     background-position: center;
     height: 100vh;

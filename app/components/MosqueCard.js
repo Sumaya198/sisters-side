@@ -19,7 +19,6 @@ const MosqueCard = ({ mosque }) => {
             <h3 className={styles.mosqueName}>{mosque.name}</h3>
             <p className={styles.address}>{mosque.formatted_address}</p>
             <div className={styles.starContainer}>
-            <div><FaStar /></div> <p>{mosque.rating}</p>
             </div>
             
             </div>

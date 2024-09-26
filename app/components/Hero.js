@@ -23,11 +23,8 @@ const Hero = () => {
   return (
       <>
       <Navbar />
-    <motion.div 
+    <div 
       className={styles.hero}
-      initial={{ scale: 1.1 }}
-      animate={{ scale: 1 }}
-      transition={{ duration: 5, ease: 'easeInOut' }}
     >
       <motion.div 
         className={styles.heroContent}
@@ -36,11 +33,16 @@ const Hero = () => {
         transition={{ duration: 2, ease: 'easeInOut' }}
       >
         {session ? (
-          <h1 className={styles.heroTitle}>Welcome to Sister's Side, {session.user.name}!</h1>
+          <>
+
+         
+          <h1 className={styles.heroTitle}>Looking for the Sisters' Side?</h1>
+          </>
         ) : (
-          <h1 className={styles.heroTitle}>Welcome to Sister's Side</h1>
+          <h1 className={styles.heroTitle}>Looking for the Sisters' Side? </h1>
+         
         )}
-        <h3 className={styles.heroSubTitle}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</h3>
+        <h3 className={styles.heroSubTitle}>The essential guide to finding a space to worship without hindrance -- no matter where you are.</h3>
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -49,7 +51,7 @@ const Hero = () => {
           <Link href="/search" className={styles.button}>Explore Masjids</Link>
         </motion.div>
       </motion.div>
-    </motion.div>
+    </div>
     <About />
     <Solution />
     <Reward />

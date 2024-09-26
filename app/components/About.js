@@ -42,16 +42,16 @@ const About = () => {
     >
       <div className={styles.imageSection}>
         <img
-          src="/about-page.jpg"
+          src="/about-section-new.png"
           alt="About Image"
           className={styles.aboutImage}
         />
       </div>
       <div className={styles.textSection}>
         <h2 className={styles.aboutHeader}>ABOUT</h2>
-        <h1 className={styles.mainHeader}>Text About Sisters Side</h1>
+        <h1 className={styles.mainHeader}>What is Sisters' Side?</h1>
         <p className={styles.subHeader}>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        Sisters' Side is a resource guide for Muslim women to find a comfortable, accessible and suitable space to pray. As an avid traveler, it was difficult to know beforehand if a masjid had a women's side or if it was even accessible. The difficulties of finding an adequate space to pray sparked the idea for Sister's Side. The goal of this platform is to help Muslim women find a space to worship without hindrance and build an empowered community of reviewers.
         </p>
       </div>
     </motion.div>

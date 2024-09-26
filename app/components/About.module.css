@@ -4,7 +4,6 @@
     align-items: center;
     justify-content: center;
     padding: 20px;
-    height: 100vh;
     position: relative;
     background-color: rgb(255, 255, 255);
   }
@@ -80,7 +79,17 @@
       flex-direction: column;
       text-align: center;
     }
+
+    .mainHeader {
+      font-size: 2rem;
+      line-height: 3rem;
+    }
     
+    .subHeader {
+      text-align: center;
+      font-size: 1.1rem;
+      line-height: 2.1rem;
+    }
     .imageSection {
       order: 1;
     }

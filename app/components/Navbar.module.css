@@ -5,20 +5,18 @@
     align-items: center;
     padding: 1rem;
     background-color: transparent;
-    /* color: black; */
     height: 60px;
     z-index: 1000;
     position: fixed;
-    top: 0;
+    top: 0; /* This is only for the nav bar itself */
     left: 0;
     right: 0;
     transition: background-color 0.3s ease;
 }
 
 .navbar.scrolled {
-    background-color: #d67366; /* Change this to the color you want when scrolled */
+    background-color: #d67366;
 }
-
 
 .logo a {
     color: white;
@@ -29,7 +27,13 @@
 .hamburger {
     display: none;
     cursor: pointer;
+    z-index: 10;
+    color: black;
     font-size: 1.5rem;
+}
+
+.hamburgerIcon {
+    color: white;
 }
 
 .navLinks {
@@ -43,21 +47,19 @@
     text-decoration: none;
 }
 
-.navLinks button {
-    background: none;
-    border: none;
-    color: white;
-    cursor: pointer;
+/* Auth Links - Logged Out */
+.authLinks {
+    display: flex;
+    gap: 20px;
+    flex-direction: row;
+    justify-content: center;
 }
-
-
 
 .login {
     background-color: #CE503F;
     padding: 5px 10px;
     border-radius: 5px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    transition: background-color 0.3s ease;
 }
 
 .login:hover {
@@ -70,69 +72,82 @@
     border-radius: 5px;
 }
 
-.homeLink {
-    display: inline-block;
-    position: relative;
-    padding-bottom: 0.25rem;
-  }
-  
-  .homeLink::before {
-    content: "";
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    width: 0;
-    height: 2px;
-    background-color: #CE503F;
-    transition: width 0.25s ease-out;
-  }
-  
-  .homeLink:hover::before {
+/* Logged-In Menu Design */
+.loggedInMenu {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.welcomeUser {
+    text-transform: capitalize;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.navLinks.open {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     width: 100%;
-    left: 0;
-    right: auto;
-  }
-  
+    height: 100vh;
+    background-color: #f5f5f5;
+    z-index: 9;
+    text-align: center;
+}
 
 @media (max-width: 768px) {
     .hamburger {
         display: block;
     }
 
+    .loggedInMenu {
+        flex-direction: column;
+    }
+
+    .welcomeUser {
+        color: black;
+    }
+
     .navLinks {
         display: none;
         flex-direction: column;
-        position: absolute;
-        top: 60px;
+        position: fixed;
         left: 0;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         right: 0;
         background-color: rgb(255, 255, 255);
-        padding: 1rem;
+        height: 100vh;
+        justify-content: center;
+        z-index: 10;
     }
-    
-    .register {
-        border: 1px solid #CE503F;
-        padding: 5px 10px;
-        border-radius: 5px;
-    }
-    .homeLink::before {
-       display: none;
-      }
-      
-      .homeLink:hover::before {
-       display: none;
-      }
-
-  
-      
 
     .navLinks.open {
         display: flex;
+        top: 0; /* Apply top positioning only on mobile */
     }
 
-    .navLinks a, .navLinks button {
-        padding: 0.5rem 15px;
+    .navLinks a {
         color: black;
+        font-size: 1.2rem;
+        padding: 1rem;
+    }
+
+    .navLinks li {
+        display: block;
+        margin: 20px 0;
+    }
+
+    .authLinks {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .login, .register {
+        width: 80%;
+        padding: 15px;
+        font-size: 1.2rem;
     }
 }
