@@ -1,6 +1,7 @@
 // app/api/reviews/route.js
-import dbConnect from '../../../../utils/dbConnect';
-import Review from '../../../../models/Review';
+import dbConnect from '../../../utils/dbConnect';
+import Review from '../../../models/Review';
+
 import { getServerSession } from 'next-auth/react';
 
 export async function POST(req) {

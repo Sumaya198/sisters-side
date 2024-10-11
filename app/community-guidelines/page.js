@@ -1,21 +1,27 @@
 // app/community-guidelines/page.js
 'use client';
 
-import { useState } from 'react';
+import { useState, Suspense } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSearchParams } from 'next/navigation';
 
 const CommunityGuidelines = () => {
     const [accepted, setAccepted] = useState(false);
     const router = useRouter();
-    const searchParams = useSearchParams();
-    const mosqueId = searchParams.get('mosqueId');
+    
+    // Wrap useSearchParams in Suspense
+    const searchParamsComponent = (
+        <Suspense fallback={<p>Loading...</p>}>
+            <SearchParams />
+        </Suspense>
+    );
 
     const handleAcceptChange = (e) => {
         setAccepted(e.target.checked);
     };
 
     const handleContinue = () => {
+        const mosqueId = searchParamsComponent?.get('mosqueId');
         if (accepted) {
             router.push(`/mosques/${mosqueId}/review`);
         }
@@ -36,3 +42,9 @@ const CommunityGuidelines = () => {
 };
 
 export default CommunityGuidelines;
+
+// Separate component for search params wrapped in Suspense
+function SearchParams() {
+    const searchParams = useSearchParams();
+    return searchParams;
+}

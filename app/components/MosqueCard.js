@@ -1,6 +1,5 @@
 // app/components/MosqueCard.js
 import Link from 'next/link';
-import { FaStar } from "react-icons/fa";
 
 import styles from './SearchForm.module.css'; 
 
